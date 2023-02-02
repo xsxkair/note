@@ -43,13 +43,13 @@
             <priority>1.0</priority>
         </url>
         <url>
-            <loc>https://my_name.github.io/note/Linux/Licheepi_Nano/驱动/GPIO驱动/寄存器GPIO驱动.html</loc>
+            <loc>https://my_name.github.io/note/Linux/Licheepi_Nano/驱动/GPIO驱动/基于设备树.html</loc>
             <lastmod>2023-02-01</lastmod>
             <changefreq>weekly</changefreq>
             <priority>1.0</priority>
         </url>
         <url>
-            <loc>https://my_name.github.io/note/Linux/Licheepi_Nano/驱动/GPIO驱动/基于设备树.html</loc>
+            <loc>https://my_name.github.io/note/Linux/Licheepi_Nano/驱动/GPIO驱动/寄存器GPIO驱动.html</loc>
             <lastmod>2023-02-01</lastmod>
             <changefreq>weekly</changefreq>
             <priority>1.0</priority>
@@ -73,18 +73,6 @@
             <priority>1.0</priority>
         </url>
         <url>
-            <loc>https://my_name.github.io/note/Linux/Licheepi_Zero/驱动/GPIO驱动/系统自带驱动.html</loc>
-            <lastmod>2023-02-01</lastmod>
-            <changefreq>weekly</changefreq>
-            <priority>1.0</priority>
-        </url>
-        <url>
-            <loc>https://my_name.github.io/note/Linux/Licheepi_Zero/驱动/GT911驱动.html</loc>
-            <lastmod>2023-02-01</lastmod>
-            <changefreq>weekly</changefreq>
-            <priority>1.0</priority>
-        </url>
-        <url>
             <loc>https://my_name.github.io/note/Linux/Licheepi_Zero/驱动/GPIO驱动/GPIO子系统.html</loc>
             <lastmod>2023-02-01</lastmod>
             <changefreq>weekly</changefreq>
@@ -92,6 +80,18 @@
         </url>
         <url>
             <loc>https://my_name.github.io/note/Linux/Licheepi_Zero/驱动/GPIO驱动/Platform驱动模型.html</loc>
+            <lastmod>2023-02-01</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>1.0</priority>
+        </url>
+        <url>
+            <loc>https://my_name.github.io/note/Linux/Licheepi_Zero/驱动/GPIO驱动/系统自带驱动.html</loc>
+            <lastmod>2023-02-01</lastmod>
+            <changefreq>weekly</changefreq>
+            <priority>1.0</priority>
+        </url>
+        <url>
+            <loc>https://my_name.github.io/note/Linux/Licheepi_Zero/驱动/GT911驱动.html</loc>
             <lastmod>2023-02-01</lastmod>
             <changefreq>weekly</changefreq>
             <priority>1.0</priority>
