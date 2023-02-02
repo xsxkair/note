@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+
+<html lang="en"  class="">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="keywords" content="GT911">
+    
+    
+    <meta name="description" content="V3S添加GT911驱动">
+    
+    <meta name="generator" content="teedoc">
+    <meta name="theme" content="teedoc-plugin-theme-default">
+    
+        
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+        
+        <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+        
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <script src="/note/static/js/theme_default/pre_main.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/prism.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/viewer.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/dark.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/light.css" type="text/css"/>
+        
+        <script src="/note/static/js/theme_default/jquery.min.js"></script>
+        
+        <script src="/note/static/js/theme_default/split.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/search/style.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/custom.css" type="text/css"/>
+        
+    
+    
+    <title>V3S添加GT911驱动 - 云笔记</title>
+    
+    <script type="text/javascript">js_vars = {}</script>
+</head>
+
+
+<body class="type_doc">
+    
+    <div id="navbar">
+        <div id="navbar_menu">
+            <a class="site_title" href="/note/">
+                
+                    <img class="site_logo" src="/note/static/image/logo.png" alt="云笔记 logo">
+                
+                
+                    <h2> </h2>
+                
+        </a>
+            <a id="navbar_menu_btn"></a>
+        </div>
+        <div id="navbar_items">
+            <div>
+                <ul id="nav_left">
+<li class="sub_items "><a >Linux</a><ul><li class=""><a  href="/note/Linux/Licheepi_Nano/说明.html">荔枝派Nano</a></li>
+<li class=""><a  href="/note/Linux/Licheepi_Zero/说明.html">荔枝派Zero</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div>
+                <ul id="nav_right">
+</ul>
+
+                <ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">Search</span>
+                            <div id="search_hints">
+                                <span id="search_input_hint">Keywords separated by space</span>
+                                <span id="search_loading_hint">Loading, wait please ...</span>
+                                <span id="search_download_err_hint">Download error, please check network and refresh again</span>
+                                <span id="search_other_docs_result_hint">Result from other docs</span>
+                                <span id="search_curr_doc_result_hint">Result from current doc</span>
+                            </div></a></li></ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <div id="sidebar_wrapper">
+            <div id="sidebar">
+                <div id="sidebar_title">
+                    
+                </div>
+                <ul class="show">
+<li class="not_active with_link"><a href="/note/Linux/Licheepi_Zero/说明.html"><span class="label">说明</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/Linux/Licheepi_Zero/系统编译.html"><span class="label">系统编译</span><span class=""></span></a></li>
+<li class="active_parent with_link"><a href="/note/Linux/Licheepi_Zero/驱动/GPIO驱动/系统自带驱动.html"><span class="label">驱动开发</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="not_active no_link"><a><span class="label">GPIO驱动</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/Linux/Licheepi_Zero/驱动/GPIO驱动/系统自带驱动.html"><span class="label">系统自带驱动</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/Linux/Licheepi_Zero/驱动/GPIO驱动/GPIO子系统.html"><span class="label">GPIO子系统</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/Linux/Licheepi_Zero/驱动/GPIO驱动/Platform驱动模型.html"><span class="label">Platform驱动模型</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="active with_link"><a href="/note/Linux/Licheepi_Zero/驱动/GT911驱动.html"><span class="label">GT911驱动</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="not_active no_link"><a><span class="label">应用开发</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/Linux/Licheepi_Zero/应用开发/v3S编译QT5.html"><span class="label">v3S移植QT5</span><span class=""></span></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+        <div id="article">
+            <div id="menu_wrapper">
+                <div id="menu">
+                </div>
+            </div>
+            <div id="content_wrapper">
+                <div id="content_body">
+                    <div id="article_head">
+                        <div id="article_title">
+                            
+                            <h1>V3S添加GT911驱动</h1>
+                            
+                        </div>
+                        <div id="article_tags">
+                            <ul>
+                            
+                                <li>GT911</li>
+                            
+                            </ul>
+                        </div>
+                        <div id="article_info">
+                        <div id="article_info_left">
+                            <span class="article_author">
+                                
+                            </span>
+                            
+                                <span class="article_date" title="Last modify date: 2023-02-01">
+                                    2023-02-01
+                                </span>
+                            
+                        </div>
+                        <div id="article_info_right">
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
+                    <div id="update_history">
+                        
+                    </div>
+                    <div id="article_content">
+                        
+                            <h2 id="%E4%B8%80%E3%80%81%E5%9C%A8linux%E6%BA%90%E7%A0%81%E4%B8%AD%E6%B7%BB%E5%8A%A0gt911%E9%A9%B1%E5%8A%A8">一、在linux源码中添加gt911驱动</h2>
+<h3 id="1.1%E3%80%81%E6%B7%BB%E5%8A%A0gt911%E9%A9%B1%E5%8A%A8%E6%BA%90%E7%A0%81">1.1、添加gt911驱动源码</h3>
+<p>drivers/input/touchscreen/gt911.c</p>
+
+<pre class="language-none"><code class="language-none">#include &lt;linux/module.h&gt;
+#include &lt;linux/regmap.h&gt;
+#include &lt;linux/gpio/consumer.h&gt;
+#include &lt;linux/of_irq.h&gt;
+#include &lt;linux/interrupt.h&gt;
+#include &lt;linux/input.h&gt;
+#include &lt;linux/input/mt.h&gt;
+#include &lt;linux/debugfs.h&gt;
+#include &lt;linux/delay.h&gt;
+#include &lt;linux/slab.h&gt;
+#include &lt;linux/gpio.h&gt;
+#include &lt;linux/of_gpio.h&gt;
+#include &lt;linux/input/mt.h&gt;
+#include &lt;linux/input/touchscreen.h&gt;
+#include &lt;linux/i2c.h&gt;
+
+
+
+/**
+ * file name：gt9xx
+ * date: 2021-09-01  15:04
+ * version：1.0
+ * author:luatao
+ * describe：gt9xx device drive
+ */
+#define GT_CTRL_REG 	            0X8040  /* GT9147控制寄存器         */
+#define GT_MODSW_REG 	        0X804D  /* GT9147模式切换寄存器        */
+#define GT_CFGS_REG 	        0X8047  /* GT9147配置起始地址寄存器    */
+#define GT_CHECK_REG 	        0X80FF  /* GT9147校验和寄存器       */
+#define GT_PID_REG 		        0X8140  /* GT9147产品ID寄存器       */
+
+#define GT_GSTID_REG 	        0X814E  /* GT9147当前检测到的触摸情况 */
+#define GT_TP1_REG 		        0X814F  /* 第一个触摸点数据地址 */
+#define GT_TP2_REG 		        0X8157	/* 第二个触摸点数据地址 */
+#define GT_TP3_REG 		        0X815F  /* 第三个触摸点数据地址 */
+#define GT_TP4_REG 		        0X8167  /* 第四个触摸点数据地址  */
+#define GT_TP5_REG 		        0X816F	/* 第五个触摸点数据地址   */
+#define MAX_SUPPORT_POINTS      5       /* 最多5点电容触摸 */
+
+
+/* 设备结构体 自定义 */
+struct gt911_dev{
+    int irq_pin, reset_pin;   /* 中断和复位IO */
+    int irqnum;   /* 中断号 */
+  //  void *private_date;  /* 私有数据 */
+    struct input_dev *input;  /* input结构体 */
+    struct i2c_client *client; /* i2c客户端 */
+ };
+
+/* 定义一个设备结构体 */
+struct gt911_dev gt911;   /*gt911 设备 */
+/*
+const unsigned char GT911_CT[]=
+{
+                                0x5A,0x20,0x03,0xE0,0x01,0x05,0x3D,0x00,0x02,0x08,0x28,
+                                0x08,0x5A,0x46,0x03,0x05,0x00,0x00,0x00,0x00,0x00,0x00,
+                                0x04,0x04,0x04,0x04,0x03,0x88,0x29,0x0A,0x4B,0x4D,0x0C,
+                                0x08,0x00,0x00,0x00,0x21,0x02,0x1D,0x00,0x01,0x00,0x00,
+                                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x46,0x64,0x94,0xD5,
+                                0x02,0x07,0x00,0x00,0x04,0x83,0x48,0x00,0x77,0x4D,0x00,
+                                0x6D,0x53,0x00,0x64,0x59,0x00,0x5A,0x60,0x00,0x5A,0x00,
+                                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                                0x00,0x00,0x02,0x04,0x06,0x08,0x0A,0x0C,0x0E,0x10,0x12,
+                                0x14,0xFF,0xFF,0xFF,0xFF,0x00,0x00,0x00,0x00,0x00,0x00,
+                                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                                0x02,0x04,0x06,0x08,0x0F,0x10,0x12,0x16,0x18,0x1C,0x1D,
+                                0x1E,0x1F,0x20,0x21,0x22,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
+                                0xFF,0xFF,0xFF,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+                                0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0xD6,0x01,
+};*/
+
+
+/* 从gt911读取多个寄存器数据 
+ @param - *dev        : gt911设备 
+ @param - reg           : 要读取的寄存器首地址
+ @param - *buf         : 读取到的数据 
+ @param - len          : 要读取的数据长度 
+ @return                    :操作结果
+*/
+static int gt911_read_regs(struct gt911_dev *dev, u16 reg, u8 *buf, int len)
+{
+    int ret = 0;
+    u8 regdata[2]; // 寄存器数据
+    struct i2c_msg msg[2];   /* 传输的消息 读的命令 */
+    struct i2c_client *client = (struct i2c_client *)dev-&gt;client;  /* 私有数据 */
+
+    /* gt911 寄存器长度为2个字节 */
+    regdata[0] = (reg &gt;&gt; 8) &amp; 0xFF;  // 高8位
+    regdata[1] = reg &amp; 0xFF;  // 低8位 
+
+    /* msg[0] 为发送要读取的首地址 */
+    msg[0].addr = client-&gt;addr;  /* 器件地址 */
+    msg[0].flags = 0;                       /* 标记为发送数据 */
+    msg[0].buf = &amp;regdata[0];              /* 要读取数据的首地址 */
+    msg[0].len = 2;                     /* reg长度 */
+
+    /* msg[1]读取数据 */
+    msg[1].addr = client-&gt;addr;  /* 器件地址 */
+    msg[1].flags = I2C_M_RD;    /* 标记为读取数据 */
+    msg[1].buf = buf;              /* 读取数据缓冲区  */
+    msg[1].len = len;                     /* 读取数据长度 */
+
+    ret = i2c_transfer(client-&gt;adapter, msg, 2);  /* 向总线发送2个消息 */
+    if(ret == 2){  /* 传输成功 */
+        ret = 0;
+    }else{
+        printk(&quot;i2c_transfer failed!\r\n&quot;);
+        return -EREMOTEIO;
+    }
+
+    return ret;
+}
+
+/* 从gt911多个寄存器写入数据 
+ @param - *dev        : gt911设备 
+ @param - reg           : 要写入的寄存器首地址
+ @param - *buf         : 写入的数据缓冲区
+ @param - len          : 要写入的数据长度 
+ @return                    :操作结果
+*/
+static s32 gt911_write_regs(struct gt911_dev *dev, uint16_t reg, uint8_t *buf, int len)
+{
+    uint8_t buf1[256];
+    struct i2c_msg msg;   /* 传输的消息 */
+    struct i2c_client *client = (struct i2c_client *)dev-&gt;client;  
+    buf1[0] = (reg &gt;&gt; 8) &amp; 0xFF;  /* 寄存器首地址 */
+    buf1[1] = reg &amp; 0xFF;  
+    memcpy(&amp;buf1[2], buf, len);  /* 要写入的数据拷贝到数据buf1中 */
+
+    /* msg处理数据 */
+    msg.addr = client-&gt;addr;  /* 器件地址 */
+    msg.flags = 0;    /* 标记为写入数据 */
+    msg.buf = buf1;              /* 要写入的数据缓冲区  */
+    msg.len = len + 2;                     /* 写入的数据长度 */
+
+    return  i2c_transfer(client-&gt;adapter, &amp;msg, 1);  /* 向总线发送1个消息 */
+}
+
+
+/* 从gt911读取指定寄存器值 读取一个寄存器
+ @param - *dev        : ap3216设备 
+ @param - reg           : 要读取的寄存器
+ @return                    :读取到的寄存器值
+*/
+
+//static unsigned char  gt911_read_reg(struct gt911_dev *dev, u8 reg)
+//{
+  // struct i2c_client *client = (struct i2c_client *)dev-&gt;client;  /* 私有数据 */
+
+    //return i2c_smbus_read_byte_data(client, reg);  /* 读取一个字节数据 */
+//}
+
+/* 向gt911指定寄存器写入指定的值，写一个寄存器 
+ @param - *dev        : ap3216设备 
+ @param - reg           : 要写入的寄存器
+ @param - data         : 要写入的值 
+ @return                    :无
+*/
+static void gt911_write_reg(struct gt911_dev *dev, uint16_t reg, uint8_t data)
+{
+    uint8_t buf = 0;
+    buf = data;
+    gt911_write_regs(dev, reg, &amp;buf, 1);  /* 调用写入多个寄存器的方法 */
+}
+
+/* 触摸中断处理函数 */
+static irqreturn_t gt911_irq_handler(int irq, void *dev_id)
+{
+    u8 touch_num = 0, status, havakey ; // 触摸点的数量最大5点触摸  数据是否准备好  是否有按键按下 
+    int input_x, input_y, id = 0;  // x，y坐标  触摸ID
+    int ret = 0;  // 返回值
+    u8 data,touch_data[5];  // 触摸数据
+    struct gt911_dev *dev = dev_id; // 触摸设备结构体
+
+    /* 判断是否进入中断 */
+    //printk(&quot;cd %s\r\n&quot;,__FUNCTION__);
+
+    /* 读取坐标点寄存器 */
+    ret = gt911_read_regs(dev, GT_GSTID_REG, &amp;data, 1); 
+    /* 这一位数据的表示：
+       bit7：1表示坐标（或按键）已经准备好，主控可以读取  0 表示未就绪，数据无效
+       bit4：1表示有按键 0表示无按键（已经松开）
+       bit3~0：屏上的坐标点个数  */
+    if(data == 0x00){  /* 没有触摸数据*/
+        goto fail;
+    }else{  /* 统计触摸信息 */
+        status = data &gt;&gt; 7;  // 取最高位 
+        havakey = (data &gt;&gt; 4) &amp; 0x01; 
+        touch_num = data &amp; 0x0f;  // 只取低4位 
+    }
+
+    /* 单点触摸 不适用于多点触摸*/
+    if(touch_num){  /* 有触摸按下   */
+        gt911_read_regs(dev, GT_TP1_REG, touch_data, 5);  // 读取第一个触摸点 连续读5个数据 
+        id = touch_data[0] &amp; 0x0F; 
+        if(id == 0){
+            input_x = (touch_data[1] | (touch_data[2] &lt;&lt; 8)) &amp; 0x0fff;  // x坐标
+            input_y = (touch_data[3] | (touch_data[4] &lt;&lt; 8)) &amp; 0x0fff;  // y坐标
+
+            input_mt_slot(dev-&gt;input, id); // 产生ABS_MT_SLOT 事件 报告是哪个触摸点的坐标 
+            input_mt_report_slot_state(dev-&gt;input, MT_TOOL_FINGER, true);   // 指定手指触摸  连续触摸
+            input_report_abs(dev-&gt;input, ABS_MT_POSITION_X, input_x);   // 上报触摸点坐标信息 
+            input_report_abs(dev-&gt;input, ABS_MT_POSITION_Y, input_y);   // 上报触摸点坐标信息 
+
+            //printk(&quot;x = %d, y = %d\r\n&quot;, input_x, input_y);  //打印坐标信息 
+        }
+    }else if(touch_num == 0){  // 单点触摸释放 
+        input_mt_slot(dev-&gt;input, id); /* 上报触摸点 */
+        input_mt_report_slot_state(dev-&gt;input, MT_TOOL_FINGER, false); // 关闭手指触摸 
+    }
+
+        input_mt_report_pointer_emulation(dev-&gt;input, true); 
+        input_sync(dev-&gt;input);   /* 同步数据 数据上报完成 */
+
+        data = 0x00;  /* 向0x814E寄存器写0  不然就会一直进入中断 */
+        gt911_write_regs(dev, GT_GSTID_REG, &amp;data, 1);   //写入
+
+fail:
+    return IRQ_HANDLED;
+}
+
+/* 申请IO并复位gt911 
+ @param - *client           : i2C控制器
+ @param - *dev         : 自定义的触摸设备
+ @return                    :0：成功             其他负值 ：失败
+*/
+static int gt911_ts_reset(struct i2c_client * client, struct gt911_dev *dev)
+{
+    int ret = 0;
+    printk(&quot;cd %s\r\n&quot;,__FUNCTION__);
+    /* 申请复位IO */
+    if(gpio_is_valid(dev-&gt;reset_pin)){  // 判断gpio是否合法
+    /* 申请复位 IO  并且默认输出高电平 */
+        ret = devm_gpio_request_one(&amp;client-&gt;dev,     
+                                                                        dev-&gt;reset_pin,
+                                                                        GPIOF_OUT_INIT_LOW,
+                                                                        &quot;gt911 reset&quot;);
+        if(ret){  // 申请失败
+            printk(&quot;request reset_pin failed!\r\n&quot;);
+             return ret;
+        }
+    }
+
+    /* 申请中断IO*/
+     if(gpio_is_valid(dev-&gt;irq_pin)){  // 判断gpio是否合法
+    /* 申请复位 IO  并且默认输出高电平 */
+        ret = devm_gpio_request_one(&amp;client-&gt;dev,     
+                                                                        dev-&gt;irq_pin,   //  引脚编号
+                                                                        GPIOF_OUT_INIT_LOW,   // 默认的电平状态 
+                                                                        &quot;gt911 irq&quot;);  // 名字 随便
+        if(ret){  // 申请失败
+            printk(&quot;request irq_pin failed!\r\n&quot;);
+             return ret;
+        }
+    }
+
+    /* 初始化gt911  */
+    gpio_set_value(dev-&gt;reset_pin, 0); /* 复位 */
+    msleep(10);
+    gpio_set_value(dev-&gt;reset_pin, 1); /* 停止复位 */
+    msleep(10);
+    gpio_set_value(dev-&gt;irq_pin, 0);    /* 拉低INT引脚 */
+    msleep(50);
+    gpio_direction_input(dev-&gt;irq_pin); /* INT引脚设置为输入 */
+
+    /* 有一个地址的判断 */
+
+    return 0;
+}
+
+/* gt911 中断初始化 
+ @param - *client           : i2C控制器
+ @param - *dev         : 自定义的触摸设备
+ @return                    :0：成功             其他负值 ：失败
+*/
+static int gt911_ts_irq(struct i2c_client * client, struct gt911_dev *dev)
+{
+    int ret = 0; // 返回值
+
+    /* 申请中断  */
+    ret = devm_request_threaded_irq(&amp;client-&gt;dev,
+                                                                            client-&gt;irq,
+                                                                            NULL,
+                                                                            gt911_irq_handler,
+                                                                            IRQF_TRIGGER_FALLING | IRQF_ONESHOT,
+                                                                            client-&gt;name,
+                                                                            &amp;gt911);
+    if(ret){
+        dev_err(&amp;client-&gt;dev, &quot;Unable to request touchscreen IRQ.\r\n&quot;);
+        return ret;
+    }
+
+    printk(&quot;gt911 handler irq number: %d\r\n&quot;, client-&gt;irq);  // 打印出中断号
+    return 0;
+}
+
+/* 发送gt911配置参数 
+ @param - *dev           : 自定义的触摸设备
+ @param - mode         : 0 :参数不保存到flash  1：参数保存到flash
+ @return                    :无
+*/
+/* 屏幕配置信息  */
+/*
+void gt911_send_cfg(void)
+{
+    u8 regdata[186] = {0};
+    unsigned int i = 0,ret = 0;
+    u8 softVersion = 0;  // 软件版本号 
+    u8 gt911_id[6] = {0}; // 产品ID
+    u8 irqmode = 0;  // 中断触发方式
+    u8 crc = 0;  // 校验和 
+
+    //  读软件版本号 
+    gt911_read_regs(&amp;gt911, GT_CFGS_REG, &amp;softVersion,1); 
+    printk(&quot;soft version:%d\r\n&quot;, softVersion);
+
+    // 读取产品ID 
+    printk(&quot;ID: &quot;);
+    gt911_read_regs(&amp;gt911, GT_PID_REG, gt911_id,6); 
+    for(i = 0; i&lt; 6;i++)
+        printk(&quot;%d &quot;, gt911_id[i]);
+
+    printk(&quot;\r\n&quot;);
+
+    // 读中断触发方式 
+    gt911_read_regs(&amp;gt911, GT_MODSW_REG, &amp;irqmode,1); 
+    printk(&quot;irqmode:%d\r\n&quot;, irqmode);
+
+    // 读取184个寄存器 
+    gt911_read_regs(&amp;gt911, GT_CFGS_REG, regdata,184); 
+    for(i= 0; i &lt; 186; i++){
+        printk(&quot;%#X &quot;, regdata[i]);
+        if(i &lt; 184){
+            crc += regdata[i];  // 校验和 
+        }
+    }
+    printk(&quot;\r\n&quot;);
+    crc = (~crc) + 1;
+    printk(&quot;crc:%d\r\n&quot;, crc);
+
+    // 软件复位 
+    gt911_write_reg(&amp;gt911, GT_CTRL_REG, 2);
+
+    // 配置186个寄存器 
+    // 获取设备树的配置信息 
+    ret = of_property_read_u8_array(gt911.client-&gt;dev.of_node, &quot;goodix,cfg-group0&quot;, regdata, 186);
+    if (ret &lt; 0) {
+        printk(&quot;goodix,cfg-group0 property read failed\r\n&quot;);
+    } else {
+        printk(&quot;reg data:\r\n&quot;);
+        for(i = 0; i &lt; 186; i++){
+            printk(&quot;%X &quot;, regdata[i]);
+        }
+        printk(&quot;\r\n&quot;);
+    }
+
+    gt911_write_regs(&amp;gt911, GT_CFGS_REG, regdata, sizeof(regdata));  
+    gt911_write_reg(&amp;gt911,GT_CTRL_REG,2);
+
+    msleep(100);
+}
+*/
+
+
+
+/* i2C驱动的probe函数 ，当驱动与设备匹配以后此函数就会执行 */
+static int gt911_probe(struct i2c_client *client, const struct i2c_device_id *id)
+{
+    u8 ret = 0; 
+    gt911.client = client; 
+    printk(&quot;gt911 driver and device has match!\r\n&quot;);  // 提示信息 
+
+    /* 1. 获取设备树中的中断和复位引脚 */
+    gt911.irq_pin = of_get_named_gpio(client-&gt;dev.of_node, &quot;irq-gpio&quot;, 0);
+    gt911.reset_pin = of_get_named_gpio(client-&gt;dev.of_node, &quot;rst-gpio&quot;, 0);
+
+    printk(&quot;get gpios success!\r\n&quot;);
+
+    /* 2. 复位gt911 申请GPIO并复位 */
+    ret = gt911_ts_reset(client, &amp;gt911);
+    if(ret &lt; 0){
+        printk(&quot;gt911 reset failed!\r\n&quot;);
+        goto fail;
+    }
+
+    /* 3. 初始化gt911 */
+    gt911_write_reg(&amp;gt911, GT_CTRL_REG, 2);  /* 软复位 */
+    mdelay(100);
+    gt911_write_reg(&amp;gt911, GT_CTRL_REG, 0);  /* 停止软复位 */
+    mdelay(100);
+
+    /* 4. input 注册设备*/
+    gt911.input  = devm_input_allocate_device(&amp;client-&gt;dev);
+    if(!gt911.input){
+        return -ENOMEM;
+    }
+
+    /* 初始化input */
+    gt911.input-&gt;name = client-&gt;name;
+    gt911.input-&gt;id.bustype = BUS_I2C;
+    gt911.input-&gt;dev.parent = &amp;client-&gt;dev;
+    /* 设置input设备需要上报事件类型和按键值*/
+    __set_bit(EV_KEY, gt911.input-&gt;evbit);
+    __set_bit(EV_ABS, gt911.input-&gt;evbit);
+    __set_bit(BTN_TOUCH, gt911.input-&gt;keybit);
+    /* 设置input设备 需要上报的绝对坐标 */
+    input_set_abs_params(gt911.input, ABS_X, 0, 800, 0, 0);
+    input_set_abs_params(gt911.input, ABS_Y, 0, 480, 0, 0);
+    input_set_abs_params(gt911.input, ABS_MT_POSITION_X,0, 800, 0, 0);
+    input_set_abs_params(gt911.input, ABS_MT_POSITION_Y,0, 480, 0, 0);	     
+    /* 初始化多点电容触摸的slots*/
+    ret = input_mt_init_slots(gt911.input, MAX_SUPPORT_POINTS, 0);  // 初始化 MT 的输入 slots  触摸点的数量
+    if(ret != 0){
+        printk(&quot;MT init failed!\r\n&quot;);
+        goto fail;
+    }
+
+    /* 注册input */
+    ret = input_register_device(gt911.input);
+    if(ret){
+        printk(&quot;input register failed!\r\n&quot;);
+        goto fail;
+    }
+
+    /* 最后初始化中断 */
+    ret = gt911_ts_irq(client, &amp;gt911);
+    if(ret &lt; 0){
+        printk(&quot;init irq failed!\r\n&quot;);
+        goto fail;
+    }
+    return 0;
+
+fail:
+    return ret;
+}
+
+/* i2c驱动后的remove函数 */
+int gt911_remove(struct i2c_client *client)
+{
+    /* 释放输入设备 */
+    input_unregister_device(gt911.input);
+
+    printk(&quot;gt911 drive unregsister ok !\r\n&quot;);
+    return 0;
+}
+
+/* 传统匹配方式ID列表 */
+static const struct i2c_device_id gt911_id[] = {
+    {&quot;goodix,gt911&quot;, 0},
+    {}
+};
+/* 匹配列表 */
+static const struct of_device_id gt911_of_match[] = {
+    {.compatible = &quot;goodix,gt911&quot;},
+    {/* Sentinel */}
+};
+
+/* i2c驱动结构体 */
+struct i2c_driver gt911_i2c_driver = {
+        .driver = {
+            .owner = THIS_MODULE,
+            .name = &quot;gt911&quot;,   /* 驱动名字 用于和设备匹配  适用于没有设备树的情况*/
+            .of_match_table =gt911_of_match,  /* 设备树匹配列表 */
+        },
+        .probe =gt911_probe,
+        .remove =gt911_remove,
+        .id_table = gt911_id, /* id配置列表 */
+};
+
+
+module_i2c_driver(gt911_i2c_driver);
+
+/* LICENSE 和 AUTHOR 信息*/
+MODULE_LICENSE(&quot;GPL&quot;);
+MODULE_AUTHOR(&quot;luatao&quot;);
+</code></pre>
+<p>修改drivers/input/touchscreen/makefile<br />
+<code>obj-y	+= gt911.o</code></p>
+<h3 id="1.2%E3%80%81%E4%BF%AE%E6%94%B9%E8%AE%BE%E5%A4%87%E6%A0%91">1.2、修改设备树</h3>
+<p>去掉设备树中其他I2C0的设备节点</p>
+
+<pre class="language-none"><code class="language-none">arch/arm/boot/dts/sun8i-v3s-licheepi-zero.dts
+/*
+&amp;i2c0 {
+    status = &quot;okay&quot;;
+
+    ns2009: ns2009@48 {
+    	compatible = &quot;nsiway,ns2009&quot;;
+    	reg = &lt;0x48&gt;;
+    	status = &quot;disabled&quot;;
+    };
+};
+*/
+</code></pre>
+<p>添加gt911节点</p>
+
+<pre class="language-none"><code class="language-none">arch/arm/boot/dts/sun8i-v3s-licheepi-zero-dock.dts
+&amp;i2c0 {
+    status = &quot;okay&quot;;
+
+    gt911: touchscreen@5d {
+        compatible = &quot;goodix,gt911&quot;;
+        reg = &lt;0x5d&gt;;
+        interrupt-parent = &lt;&amp;pio&gt;;
+        interrupts = &lt;1 3 IRQ_TYPE_EDGE_FALLING&gt;; /* (PB3) */
+        pinctrl-names = &quot;default&quot;;
+        irq-gpio = &lt;&amp;pio 1 3 GPIO_ACTIVE_HIGH&gt;; /* (PB3) */
+        rst-gpio = &lt;&amp;pio 1 2 GPIO_ACTIVE_HIGH&gt;; /* RST (PB2) */
+    	status = &quot;okay&quot;;
+        /* touchscreen-swapped-x-y */
+    };
+};
+</code></pre>
+<h3 id="1.3%E3%80%81%E7%BC%96%E8%AF%91linux">1.3、编译linux</h3>
+<p>拷贝zimage和sun8i-v3s-licheepi-zero-dock.dtb到sd卡第一分区</p>
+<h2 id="%E4%BA%8C%E3%80%81%E7%A7%BB%E6%A4%8Dtslib">二、移植tslib</h2>
+<h3 id="2.1%E3%80%81%E5%9C%A8buildroot%E4%B8%AD%E6%89%93%E5%BC%80tslib">2.1、在buildroot中打开tslib</h3>
+<p>在buildroot中打开tslib</p>
+
+<pre class="language-none"><code class="language-none"> make menuconfig
+ Target packages —&gt;
+        Graphic libraries and applications (graphic/text) —&gt;
+            [*] Qt5 —&gt;
+                [*] Enable Tslib support
+</code></pre>
+<h3 id="2.2%E3%80%81%E7%BC%96%E8%AF%91buildroot">2.2、编译buildroot</h3>
+
+<pre class="language-none"><code class="language-none">```
+make
+
+#解压文件系统到第二分区
+tar -xvf output/images/rootfs.tar -C /media/xsx/rootfs/
+```
+
+</code></pre>
+<h2 id="%E4%B8%89%E3%80%81%E7%9B%AE%E6%A0%87%E6%9D%BF%E4%B8%8A%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83">三、目标板上配置环境</h2>
+<h3 id="3.1%E3%80%81%E6%B7%BB%E5%8A%A0tslib%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">3.1、添加tslib环境变量</h3>
+<p>修改/etc/profile</p>
+
+<pre class="language-none"><code class="language-none">vi /etc/profile
+
+export T_ROOT=/usr/tslib4arm                        		#目录
+export TSLIB_TSDEVICE=/dev/input/event1                     #触摸屏设备文件
+export TSLIB_CALIBFILE=/etc/pointercal                		#指定触摸屏校准文件pintercal的存放位置
+export TSLIB_CONFFILE=/etc/ts.conf             				#tslib模块配置文件
+export TSLIB_PLUGINDIR=/usr/lib/ts/                			#tslib插件库目录
+export TSLIB_CONSOLEDEVICE=/dev/tty
+export TSLIB_FBDEVICE=/dev/fb0                        		#framebuffer设备文件
+</code></pre>
+<p>使生效<br />
+<code>source /etc/profile</code><br />
+测试<br />
+<code>ts_test</code><br />
+<img src="../assets/images/gt911.png" alt="" /><br />
+发现触摸不准，可校准<br />
+<code>ts_calibrate</code><br />
+校准之后，可再次测试，发现触摸已准</p>
+
+                        
+                    </div>
+                </div>
+                <div id="previous_next">
+                    <div id="previous">
+                        
+                        <a href="/note/Linux/Licheepi_Zero/驱动/GPIO驱动/Platform驱动模型.html">
+                            <span class="icon"></span>
+                            <span class="label">Platform驱动模型</span>
+                        </a>
+                        
+                    </div>
+                    <div id="next">
+                        
+                        <a href="/note/Linux/Licheepi_Zero/应用开发/v3S编译QT5.html">
+                            <span class="label">v3S移植QT5</span>
+                            <span class="icon"></span>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div id="comments-container"></div>
+            </div>
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="to_top" href="#"></a>
+    <div id="doc_footer">
+        <div id="footer">
+            <div id="footer_top">
+                <ul>
+<li><a></a><ul><li><a target="_blank" href="/note/#"></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div id="footer_bottom">
+                <ul>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc">Generated by teedoc</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="/note/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+        <script src="/note/static/js/theme_default/tocbot.min.js"></script>
+    
+        <script src="/note/static/js/theme_default/main.js"></script>
+    
+        <script src="/note/static/js/theme_default/viewer.min.js"></script>
+    
+        <script src="/note/static/css/theme_default/prism.min.js"></script>
+    
+        <script src="/note/static/js/search/search_main.js"></script>
+    
+        <script src="/note/static/js/custom.js"></script>
+    
+</body>
+
+</html>

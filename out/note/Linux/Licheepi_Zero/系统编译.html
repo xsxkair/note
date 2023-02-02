@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+
+<html lang="en"  class="">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="keywords" content="编译V3S系统">
+    
+    
+    <meta name="description" content="编译V3S系统">
+    
+    <meta name="generator" content="teedoc">
+    <meta name="theme" content="teedoc-plugin-theme-default">
+    
+        
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+        
+        <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+        
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <script src="/note/static/js/theme_default/pre_main.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/prism.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/viewer.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/dark.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/theme_default/light.css" type="text/css"/>
+        
+        <script src="/note/static/js/theme_default/jquery.min.js"></script>
+        
+        <script src="/note/static/js/theme_default/split.js"></script>
+        
+        <link rel="stylesheet" href="/note/static/css/search/style.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/note/static/css/custom.css" type="text/css"/>
+        
+    
+    
+    <title>编译V3S系统 - 云笔记</title>
+    
+    <script type="text/javascript">js_vars = {}</script>
+</head>
+
+
+<body class="type_doc">
+    
+    <div id="navbar">
+        <div id="navbar_menu">
+            <a class="site_title" href="/note/">
+                
+                    <img class="site_logo" src="/note/static/image/logo.png" alt="云笔记 logo">
+                
+                
+                    <h2> </h2>
+                
+        </a>
+            <a id="navbar_menu_btn"></a>
+        </div>
+        <div id="navbar_items">
+            <div>
+                <ul id="nav_left">
+<li class="sub_items "><a >Linux</a><ul><li class=""><a  href="/note/Linux/Licheepi_Nano/说明.html">荔枝派Nano</a></li>
+<li class=""><a  href="/note/Linux/Licheepi_Zero/说明.html">荔枝派Zero</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div>
+                <ul id="nav_right">
+</ul>
+
+                <ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">Search</span>
+                            <div id="search_hints">
+                                <span id="search_input_hint">Keywords separated by space</span>
+                                <span id="search_loading_hint">Loading, wait please ...</span>
+                                <span id="search_download_err_hint">Download error, please check network and refresh again</span>
+                                <span id="search_other_docs_result_hint">Result from other docs</span>
+                                <span id="search_curr_doc_result_hint">Result from current doc</span>
+                            </div></a></li></ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <div id="sidebar_wrapper">
+            <div id="sidebar">
+                <div id="sidebar_title">
+                    
+                </div>
+                <ul class="show">
+<li class="not_active with_link"><a href="/note/Linux/Licheepi_Zero/说明.html"><span class="label">说明</span><span class=""></span></a></li>
+<li class="active with_link"><a href="/note/Linux/Licheepi_Zero/系统编译.html"><span class="label">系统编译</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/Linux/Licheepi_Zero/驱动/GPIO驱动/系统自带驱动.html"><span class="label">驱动开发</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="not_active no_link"><a><span class="label">GPIO驱动</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/Linux/Licheepi_Zero/驱动/GPIO驱动/系统自带驱动.html"><span class="label">系统自带驱动</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/Linux/Licheepi_Zero/驱动/GPIO驱动/GPIO子系统.html"><span class="label">GPIO子系统</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/note/Linux/Licheepi_Zero/驱动/GPIO驱动/Platform驱动模型.html"><span class="label">Platform驱动模型</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="not_active with_link"><a href="/note/Linux/Licheepi_Zero/驱动/GT911驱动.html"><span class="label">GT911驱动</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="not_active no_link"><a><span class="label">应用开发</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/note/Linux/Licheepi_Zero/应用开发/v3S编译QT5.html"><span class="label">v3S移植QT5</span><span class=""></span></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+        <div id="article">
+            <div id="menu_wrapper">
+                <div id="menu">
+                </div>
+            </div>
+            <div id="content_wrapper">
+                <div id="content_body">
+                    <div id="article_head">
+                        <div id="article_title">
+                            
+                            <h1>编译V3S系统</h1>
+                            
+                        </div>
+                        <div id="article_tags">
+                            <ul>
+                            
+                                <li>编译V3S系统</li>
+                            
+                            </ul>
+                        </div>
+                        <div id="article_info">
+                        <div id="article_info_left">
+                            <span class="article_author">
+                                
+                            </span>
+                            
+                                <span class="article_date" title="Last modify date: 2023-02-01">
+                                    2023-02-01
+                                </span>
+                            
+                        </div>
+                        <div id="article_info_right">
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
+                    <div id="update_history">
+                        
+                    </div>
+                    <div id="article_content">
+                        
+                            <h2 id="%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91%E9%93%BE%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85">交叉编译链工具安装</h2>
+<ul>
+<li>工具下载地址，这里使用7.5版本的交叉编译链，建议迅雷下载</li>
+</ul>
+<p><code>https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/arm-linux-gnueabihf/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz</code></p>
+<ul>
+<li>下载完后，复制到ubuntu中</li>
+<li>解压<br />
+<code>tar -vxJf gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz</code></li>
+<li>复制到系统目录<br />
+<code>sudo cp -r ./gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf /opt/</code></li>
+<li>添加到系统环境变量
+<pre class="language-none"><code class="language-none">#打开配置文件
+sudo vim /etc/bash.bashrc
+#在文件最后添加
+PATH=&quot;$PATH:/opt/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin&quot;
+#使文件生效
+source /etc/bash.bashrc
+</code></pre>
+</li>
+<li>验证生效，重启<br />
+  <code>arm-linux-gnueabihf-gcc -v</code></li>
+</ul>
+<h2 id="U%E7%9B%98%E5%88%86%E5%8C%BA">U盘分区</h2>
+<ul>
+<li><p>安装gparted工具<br />
+<code>sudo apt-get install gparted</code></p>
+</li>
+<li><p>分区1<br />
+从1M偏移处开始，大小32M，fat16格式</p>
+</li>
+<li><p>分区2<br />
+剩余所有空间，exe4格式</p>
+</li>
+</ul>
+<h2 id="%E7%BC%96%E8%AF%91u-boot">编译u-boot</h2>
+<ul>
+<li>下载荔枝派u-boot<br />
+<code>git clone https://github.com/Lichee-Pi/u-boot.git -b v3s-current</code></li>
+<li>修改 include/configs/sun8i.h, 使u-boot可以直接从tf卡启动
+<pre class="language-none"><code class="language-none">  #define CONFIG_BOOTCOMMAND   &quot;setenv bootm_boot_mode sec; &quot; \
+                          &quot;load mmc 0:1 0x41000000 zImage; &quot;  \
+                          &quot;load mmc 0:1 0x41800000 sun8i-v3s-licheepi-zero-dock.dtb; &quot; \
+                          &quot;bootz 0x41000000 - 0x41800000;&quot;
+  #define CONFIG_BOOTARGS      &quot;console=ttyS0,115200 panic=5 rootwait root=/dev/mmcblk0p2 earlyprintk rw  vt.global_cursor_default=0&quot;
+</code></pre>
+</li>
+<li>编译
+<pre class="language-none"><code class="language-none">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- LicheePi_Zero_800x480LCD_defconfig
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j8
+</code></pre>
+</li>
+<li>烧录到TF卡<br />
+<code>sudo dd if=u-boot-sunxi-with-spl.bin of=/dev/sdb bs=1024 seek=8</code></li>
+<li>此时插入TF启动，即可看到u-boot的启动信息</li>
+</ul>
+<h2 id="%E7%BC%96%E8%AF%91linux">编译linux</h2>
+<ul>
+<li><p>下载linux<br />
+<code>git clone -b zero-5.2.y --depth 1 https://github.com/Lichee-Pi/linux.git</code></p>
+</li>
+<li><p>编译</p>
+
+<pre class="language-none"><code class="language-none">make ARCH=arm licheepi_zero_defconfig
+make ARCH=arm menuconfig
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j8
+</code></pre>
+</li>
+<li><p>将<code>arch/arm/boot/zImage</code>和<code>arch/arm/boot/dts/sun8i-v3s-licheepi-zero-dock.dtb</code>复制到SD卡的第一分区即可</p>
+</li>
+</ul>
+<h2 id="%E7%BC%96%E8%AF%91%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">编译文件系统</h2>
+<ul>
+<li><p>下载</p>
+
+<pre class="language-none"><code class="language-none">wget https://buildroot.org/downloads/buildroot-2021.02.4.tar.gz
+tar xvf buildroot-2021.02.4.tar.gz
+cd LicheePi_Nano/buildroot-2021.02.4
+</code></pre>
+</li>
+<li><p>使用make menuconfig命令，来配置buildroot</p>
+<ol>
+<li><p>target options<br />
+ <img src="./assets/images/buildroot_1.png" alt="" /></p>
+</li>
+<li><p>编译链设置，使用外部交叉编译链，即编译u-boot和kernel的编译链，这样的好处是u-boot、kernel、rootfs、app全部都可以使用此编译链<br />
+ <img src="./assets/images/buildroot_2.png" alt="" /></p>
+
+<pre class="language-none"><code class="language-none">#设置使用外部交叉编译链
+Toolchain type (External toolchain)  ---&gt;
+  x   ( ) Buildroot toolchain
+  x   (X) External toolchain
+
+Toolchain (Custom toolchain)
+Toolchain origin (Pre-installed toolchain)
+Toolchain path ---&gt;
+    /opt/gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/
+Toolchain prefix ---&gt;
+    $(ARCH)-linux-gnueabihf 
+
+##因为前面安装的是7.5的交叉编译链
+External toolchain gcc version (7.x)
+
+#编译链使用内核版本，查看路径：arm-linux-gnueabihf/libc/usr/include/linux/version.h
+版本解析：4.6(263680=0x040600, 即4.6.0)
+7.5交叉编译链的内核版本为4.10
+External toolchain kernel headers series (4.10.x)
+
+External toolchain C library (glibc/eglibc)
+</code></pre>
+</li>
+<li><p>编译 <code>make</code></p>
+</li>
+<li><p>解压到SD卡第二分区<br />
+ <code>tar -xvf output/images/rootfs.tar -C /media/xsx/rootfs/</code></p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="%E4%B8%8A%E7%94%B5%E9%AA%8C%E8%AF%81">上电验证</h2>
+<p>插上SD卡，上电后，即可看到进入系统</p>
+
+                        
+                    </div>
+                </div>
+                <div id="previous_next">
+                    <div id="previous">
+                        
+                        <a href="/note/Linux/Licheepi_Zero/说明.html">
+                            <span class="icon"></span>
+                            <span class="label">说明</span>
+                        </a>
+                        
+                    </div>
+                    <div id="next">
+                        
+                        <a href="/note/Linux/Licheepi_Zero/驱动/GPIO驱动/系统自带驱动.html">
+                            <span class="label">系统自带驱动</span>
+                            <span class="icon"></span>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div id="comments-container"></div>
+            </div>
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="to_top" href="#"></a>
+    <div id="doc_footer">
+        <div id="footer">
+            <div id="footer_top">
+                <ul>
+<li><a></a><ul><li><a target="_blank" href="/note/#"></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div id="footer_bottom">
+                <ul>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc">Generated by teedoc</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="/note/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+        <script src="/note/static/js/theme_default/tocbot.min.js"></script>
+    
+        <script src="/note/static/js/theme_default/main.js"></script>
+    
+        <script src="/note/static/js/theme_default/viewer.min.js"></script>
+    
+        <script src="/note/static/css/theme_default/prism.min.js"></script>
+    
+        <script src="/note/static/js/search/search_main.js"></script>
+    
+        <script src="/note/static/js/custom.js"></script>
+    
+</body>
+
+</html>

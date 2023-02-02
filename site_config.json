@@ -1,7 +1,7 @@
 {
     "site_name": "云笔记",
     "site_slogon": "",
-    "site_root_url": "/",
+    "site_root_url": "/note/",
     "site_domain": "my_name.github.io",
     "site_protocol": "https",
     "config_template_dir": "config",
