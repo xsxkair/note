@@ -1,0 +1,49 @@
+{
+    "items": [
+        {
+            "label": "说明",
+            "file": "说明.md"
+        },
+        {
+            "label": "系统编译",
+            "file": "系统编译.md"
+        },
+        {
+            "label": "驱动开发",
+            "file": "驱动/GPIO驱动/系统自带驱动.md",
+            "collapsed": false,
+            "items": [
+                {
+                    "label": "GPIO驱动",
+                    "items": [
+                        {
+                            "label": "系统自带驱动",
+                            "file": "驱动/GPIO驱动/系统自带驱动.md"
+                        },
+                        {
+                            "label": "GPIO子系统",
+                            "file": "驱动/GPIO驱动/GPIO子系统.md"
+                        },
+                        {
+                            "label": "Platform驱动模型",
+                            "file": "驱动/GPIO驱动/Platform驱动模型.md"
+                        }
+                    ]
+                },
+                {
+                    "label": "GT911驱动",
+                    "file": "驱动/GT911驱动.md"
+                }
+            ]
+        },
+        {
+            "label": "应用开发",
+            "items": [
+                {
+                    "label": "v3S移植QT5",
+                    "file": "应用开发/v3S编译QT5.md"
+                }
+            ]
+        }
+    ]
+}

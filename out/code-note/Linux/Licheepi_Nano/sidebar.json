@@ -1,0 +1,49 @@
+{
+    "items": [
+        {
+            "label": "说明",
+            "file": "说明.md"
+        },
+        {
+            "label": "系统编译",
+            "items": [
+                {
+                    "label": "编译U-boot",
+                    "file": "系统编译/编译U-boot.md"
+                },
+                {
+                    "label": "编译Linux",
+                    "file": "系统编译/编译Linux.md"
+                },
+                {
+                    "label": "编译BuildRoot",
+                    "file": "系统编译/编译BuildRoot.md"
+                }
+            ]
+        },
+        {
+            "label": "驱动开发",
+            "file": "驱动/GPIO驱动/系统自带驱动.md",
+            "collapsed": false,
+            "items": [
+                {
+                    "label": "GPIO驱动",
+                    "items": [
+                        {
+                            "label": "寄存器GPIO驱动",
+                            "file": "驱动/GPIO驱动/寄存器GPIO驱动.md"
+                        },
+                        {
+                            "label": "基于设备树",
+                            "file": "驱动/GPIO驱动/基于设备树.md"
+                        },
+                        {
+                            "label": "基于platform总线",
+                            "file": "驱动/GPIO驱动/基于platform总线.md"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

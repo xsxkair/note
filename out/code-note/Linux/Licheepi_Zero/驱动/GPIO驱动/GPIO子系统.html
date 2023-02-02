@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html lang="en"  class="">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="keywords" content="LED驱动">
+    
+    
+    <meta name="description" content="LED驱动">
+    
+    <meta name="generator" content="teedoc">
+    <meta name="theme" content="teedoc-plugin-theme-default">
+    
+        
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+        
+        <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+        
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <script src="/code-note/static/js/theme_default/pre_main.js"></script>
+        
+        <link rel="stylesheet" href="/code-note/static/css/theme_default/prism.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/code-note/static/css/theme_default/viewer.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/code-note/static/css/theme_default/dark.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/code-note/static/css/theme_default/light.css" type="text/css"/>
+        
+        <script src="/code-note/static/js/theme_default/jquery.min.js"></script>
+        
+        <script src="/code-note/static/js/theme_default/split.js"></script>
+        
+        <link rel="stylesheet" href="/code-note/static/css/search/style.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/code-note/static/css/custom.css" type="text/css"/>
+        
+    
+    
+    <title>基于GPIO子系统的LED驱动 - 云笔记</title>
+    
+    <script type="text/javascript">js_vars = {}</script>
+</head>
+
+
+<body class="type_doc">
+    
+    <div id="navbar">
+        <div id="navbar_menu">
+            <a class="site_title" href="/code-note/">
+                
+                    <img class="site_logo" src="/code-note/static/image/logo.png" alt="云笔记 logo">
+                
+                
+                    <h2> </h2>
+                
+        </a>
+            <a id="navbar_menu_btn"></a>
+        </div>
+        <div id="navbar_items">
+            <div>
+                <ul id="nav_left">
+<li class="sub_items "><a >Linux</a><ul><li class=""><a  href="/code-note/Linux/Licheepi_Nano/说明.html">荔枝派Nano</a></li>
+<li class=""><a  href="/code-note/Linux/Licheepi_Zero/说明.html">荔枝派Zero</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div>
+                <ul id="nav_right">
+</ul>
+
+                <ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">Search</span>
+                            <div id="search_hints">
+                                <span id="search_input_hint">Keywords separated by space</span>
+                                <span id="search_loading_hint">Loading, wait please ...</span>
+                                <span id="search_download_err_hint">Download error, please check network and refresh again</span>
+                                <span id="search_other_docs_result_hint">Result from other docs</span>
+                                <span id="search_curr_doc_result_hint">Result from current doc</span>
+                            </div></a></li></ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <div id="sidebar_wrapper">
+            <div id="sidebar">
+                <div id="sidebar_title">
+                    
+                </div>
+                <ul class="show">
+<li class="not_active with_link"><a href="/code-note/Linux/Licheepi_Zero/说明.html"><span class="label">说明</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/code-note/Linux/Licheepi_Zero/系统编译.html"><span class="label">系统编译</span><span class=""></span></a></li>
+<li class="active_parent with_link"><a href="/code-note/Linux/Licheepi_Zero/驱动/GPIO驱动/系统自带驱动.html"><span class="label">驱动开发</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="active_parent no_link"><a><span class="label">GPIO驱动</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="not_active with_link"><a href="/code-note/Linux/Licheepi_Zero/驱动/GPIO驱动/系统自带驱动.html"><span class="label">系统自带驱动</span><span class=""></span></a></li>
+<li class="active with_link"><a href="/code-note/Linux/Licheepi_Zero/驱动/GPIO驱动/GPIO子系统.html"><span class="label">GPIO子系统</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/code-note/Linux/Licheepi_Zero/驱动/GPIO驱动/Platform驱动模型.html"><span class="label">Platform驱动模型</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="not_active with_link"><a href="/code-note/Linux/Licheepi_Zero/驱动/GT911驱动.html"><span class="label">GT911驱动</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="not_active no_link"><a><span class="label">应用开发</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/code-note/Linux/Licheepi_Zero/应用开发/v3S编译QT5.html"><span class="label">v3S移植QT5</span><span class=""></span></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+        <div id="article">
+            <div id="menu_wrapper">
+                <div id="menu">
+                </div>
+            </div>
+            <div id="content_wrapper">
+                <div id="content_body">
+                    <div id="article_head">
+                        <div id="article_title">
+                            
+                            <h1>基于GPIO子系统的LED驱动</h1>
+                            
+                        </div>
+                        <div id="article_tags">
+                            <ul>
+                            
+                                <li>LED驱动</li>
+                            
+                            </ul>
+                        </div>
+                        <div id="article_info">
+                        <div id="article_info_left">
+                            <span class="article_author">
+                                
+                            </span>
+                            
+                                <span class="article_date" title="Last modify date: 2023-02-01">
+                                    2023-02-01
+                                </span>
+                            
+                        </div>
+                        <div id="article_info_right">
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
+                    <div id="update_history">
+                        
+                    </div>
+                    <div id="article_content">
+                        
+                            <h2 id="1.-%E9%A9%B1%E5%8A%A8%E7%B3%BB%E7%BB%9F%E8%87%AA%E5%B8%A6LED%E9%A9%B1%E5%8A%A8">1. 驱动系统自带LED驱动</h2>
+
+<pre class="language-none"><code class="language-none">##全部disabled
+leds {
+	blue_led {
+		status = &quot;disabled&quot;;
+	};
+
+	green_led {
+		status = &quot;disabled&quot;;
+	};
+
+	red_led {
+		status = &quot;disabled&quot;;
+	};
+};
+
+</code></pre>
+<h2 id="2.-%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89led%E8%8A%82%E7%82%B9">2. 添加自定义led节点</h2>
+
+<pre class="language-none"><code class="language-none">bingpi_led_in_gpio {
+	compatible = &quot;xsx,bingpi_gpio&quot;;
+	led-gpios = &lt;&amp;pio 6 1 GPIO_ACTIVE_LOW&gt;; /* PG1 */
+	status = &quot;okay&quot;;
+};
+
+</code></pre>
+<h2 id="3.-%E6%B7%BB%E5%8A%A0%E9%A9%B1%E5%8A%A8">3. 添加驱动</h2>
+<blockquote>
+<p>driver/leds/led_bingpi_in_gpio.c</p>
+</blockquote>
+
+<pre class="language-none"><code class="language-none">#include &lt;linux/module.h&gt;
+#include &lt;linux/kernel.h&gt;
+#include &lt;linux/fs.h&gt;
+#include &lt;linux/init.h&gt;
+#include &lt;linux/io.h&gt;
+#include &lt;linux/uaccess.h&gt;
+#include &lt;linux/device.h&gt;
+#include &lt;linux/cdev.h&gt;
+#include &lt;linux/platform_device.h&gt;
+#include &lt;linux/of.h&gt;
+#include &lt;linux/gpio/consumer.h&gt;
+#include &lt;linux/slab.h&gt;
+#include &lt;linux/string.h&gt;
+#include &lt;linux/gpio.h&gt;
+
+static dev_t led_dev_num; // 定义一个设备号
+static struct cdev *led_cdev; // 定义一个设备管理结构体指针
+static struct class *led_class; // 定义一个设备类
+static struct device *led_device; // 定义一个设备
+
+struct gpio_desc *led_pin;
+
+static int led_open(struct inode *inode, struct file *file)
+{
+    gpiod_direction_output(led_pin, 0);
+    return 0;
+}
+
+static int led_close(struct inode *inode, struct file *file)
+{
+    return 0;
+}
+
+static int led_read(struct file *filp, char __user *buff, size_t count,
+    	    loff_t *off)
+{
+    int res;
+    size_t status = gpiod_get_value(led_pin);
+
+    // 将内核空间数据拷贝到用户空间
+    // statue =&gt; buff, 大小4字节
+    res = copy_to_user(buff, &amp;status, 4);
+    if (res &lt; 0)
+    	printk(KERN_DEBUG &quot;read error!!!\r\n&quot;);
+    else
+    	printk(KERN_DEBUG &quot;read ok!!!\r\n&quot;);
+
+    return res;
+}
+
+static int led_write(struct file *filp, const char __user *buff, size_t count,
+    	     loff_t *offp)
+{
+    int res = 0;
+    size_t statue = 0;
+
+    res = copy_from_user(&amp;statue, buff, 4);
+    if (res &lt; 0) {
+    	printk(KERN_DEBUG &quot;write error!!!\r\n&quot;);
+    	return 0;
+    }
+
+    if (!!statue)
+    	gpiod_set_value(led_pin, 1);
+    else
+    	gpiod_set_value(led_pin, 0);
+
+    return 1;
+}
+
+static struct file_operations led_ops = {
+    .owner = THIS_MODULE,
+    .open = led_open,
+    .read = led_read,
+    .write = led_write,
+    .release = led_close,
+};
+
+static int led_probe(struct platform_device *pdev)
+{
+    struct resource *res;
+    int ret;
+
+    led_cdev = cdev_alloc(); //动态申请一个设备结构体
+    if (led_cdev == NULL) {
+    	printk(KERN_WARNING &quot;cdev alloc fail!!\r\b&quot;);
+    	return -1;
+    }
+
+    ret = alloc_chrdev_region(&amp;led_dev_num, 0, 1,
+    			  &quot;led_bingpi_gpio&quot;); //动态申请一个设备号
+    if (ret != 0) {
+    	printk(KERN_WARNING &quot;alloc_chrdev_region fail!!\r\b&quot;);
+    	return -2;
+    }
+
+    led_cdev-&gt;owner = THIS_MODULE;
+    led_cdev-&gt;ops = &amp;led_ops;
+    cdev_add(led_cdev, led_dev_num, 1); //将设备添加到内核中
+
+    led_class = class_create(THIS_MODULE, &quot;led_bingpi_gpio_class&quot;);
+    if (led_class == NULL) {
+    	printk(KERN_WARNING &quot;class_create fail!!\r\b&quot;);
+    	return -3;
+    }
+
+    led_device = device_create(led_class, NULL, led_dev_num, NULL,
+    			   &quot;led_bingpi_gpio&quot;);
+    if (IS_ERR(led_device)) {
+    	printk(KERN_WARNING &quot;device_create fail!!\r\b&quot;);
+    	return -4;
+    }
+
+    led_pin = devm_gpiod_get(&amp;pdev-&gt;dev, &quot;led&quot;, GPIOF_OUT_INIT_LOW);
+    if (IS_ERR(led_pin)) {
+    	printk(KERN_ERR &quot;Get gpio resource failed!\n&quot;);
+    	return -1;
+    }
+
+    return 0;
+}
+
+static int led_remove(struct platform_device *pdev)
+{
+    devm_gpiod_put(&amp;pdev-&gt;dev, led_pin);
+
+    return 0;
+}
+
+static struct of_device_id led_match_table[] = {
+    {
+    	.compatible = &quot;xsx,bingpi_gpio&quot;,
+    },
+    {},
+};
+
+static struct platform_device_id led_device_ids[] = {
+    {
+    	.name = &quot;bingpi_gpio&quot;,
+    },
+    {},
+};
+
+static struct platform_driver led_driver={
+    .probe = led_probe,
+    .remove = led_remove,
+    .driver = {
+        .name = &quot;led_gpio&quot;,
+        .of_match_table = led_match_table,
+    },
+    .id_table = led_device_ids,
+};
+
+module_platform_driver(led_driver);
+
+MODULE_LICENSE(&quot;GPL&quot;); //不加的话加载会有错误提醒
+MODULE_AUTHOR(&quot;1477153217@qq.com&quot;); //作者
+MODULE_VERSION(&quot;0.1&quot;); //版本
+MODULE_DESCRIPTION(&quot;led_driver&quot;); //简单的描述
+
+</code></pre>
+<h2 id="4.-%E4%BF%AE%E6%94%B9makefile">4. 修改makefile</h2>
+<blockquote>
+<p>obj-y		+= led_bingpi_in_gpio.o</p>
+</blockquote>
+<h2 id="5.-%E7%BC%96%E8%AF%91%E5%90%8E%E4%B8%8B%E8%BD%BD%E9%AA%8C%E8%AF%81">5. 编译后下载验证</h2>
+<p>设备路径：/dev/led_bingpi_gpio，存在即表明驱动注册成功<br />
+app验证：<code>./led_test_app.o /dev/led_bingpi_gpio 10</code><br />
+现象：LED闪10次</p>
+
+                        
+                    </div>
+                </div>
+                <div id="previous_next">
+                    <div id="previous">
+                        
+                        <a href="/code-note/Linux/Licheepi_Zero/驱动/GPIO驱动/系统自带驱动.html">
+                            <span class="icon"></span>
+                            <span class="label">系统自带驱动</span>
+                        </a>
+                        
+                    </div>
+                    <div id="next">
+                        
+                        <a href="/code-note/Linux/Licheepi_Zero/驱动/GPIO驱动/Platform驱动模型.html">
+                            <span class="label">Platform驱动模型</span>
+                            <span class="icon"></span>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div id="comments-container"></div>
+            </div>
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="to_top" href="#"></a>
+    <div id="doc_footer">
+        <div id="footer">
+            <div id="footer_top">
+                <ul>
+<li><a></a><ul><li><a target="_blank" href="/code-note/#"></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div id="footer_bottom">
+                <ul>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc">Generated by teedoc</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="/code-note/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+        <script src="/code-note/static/js/theme_default/tocbot.min.js"></script>
+    
+        <script src="/code-note/static/js/theme_default/main.js"></script>
+    
+        <script src="/code-note/static/js/theme_default/viewer.min.js"></script>
+    
+        <script src="/code-note/static/css/theme_default/prism.min.js"></script>
+    
+        <script src="/code-note/static/js/search/search_main.js"></script>
+    
+        <script src="/code-note/static/js/custom.js"></script>
+    
+</body>
+
+</html>

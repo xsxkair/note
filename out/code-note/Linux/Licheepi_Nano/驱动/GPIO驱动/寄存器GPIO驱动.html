@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html lang="en"  class="">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="keywords" content="">
+    
+    
+    <meta name="description" content="">
+    
+    <meta name="generator" content="teedoc">
+    <meta name="theme" content="teedoc-plugin-theme-default">
+    
+        
+        <meta name="markdown-generator" content="teedoc-plugin-markdown-parser">
+        
+        <script>
+MathJax = {"loader": {"load": ["output/svg"]}, "tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]]}, "svg": {"fontCache": "global"}};
+</script>
+        
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        
+        <script src="/code-note/static/js/theme_default/pre_main.js"></script>
+        
+        <link rel="stylesheet" href="/code-note/static/css/theme_default/prism.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/code-note/static/css/theme_default/viewer.min.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/code-note/static/css/theme_default/dark.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/code-note/static/css/theme_default/light.css" type="text/css"/>
+        
+        <script src="/code-note/static/js/theme_default/jquery.min.js"></script>
+        
+        <script src="/code-note/static/js/theme_default/split.js"></script>
+        
+        <link rel="stylesheet" href="/code-note/static/css/search/style.css" type="text/css"/>
+        
+        <link rel="stylesheet" href="/code-note/static/css/custom.css" type="text/css"/>
+        
+    
+    
+    <title>寄存器GPIO驱动 - 云笔记</title>
+    
+    <script type="text/javascript">js_vars = {}</script>
+</head>
+
+
+<body class="type_doc">
+    
+    <div id="navbar">
+        <div id="navbar_menu">
+            <a class="site_title" href="/code-note/">
+                
+                    <img class="site_logo" src="/code-note/static/image/logo.png" alt="云笔记 logo">
+                
+                
+                    <h2> </h2>
+                
+        </a>
+            <a id="navbar_menu_btn"></a>
+        </div>
+        <div id="navbar_items">
+            <div>
+                <ul id="nav_left">
+<li class="sub_items "><a >Linux</a><ul><li class=""><a  href="/code-note/Linux/Licheepi_Nano/说明.html">荔枝派Nano</a></li>
+<li class=""><a  href="/code-note/Linux/Licheepi_Zero/说明.html">荔枝派Zero</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div>
+                <ul id="nav_right">
+</ul>
+
+                <ul class="nav_plugins"><li><a id="themes" class="light"></a></li></ul><ul class="nav_plugins"><li><a id="search"><span class="icon"></span><span class="placeholder">Search</span>
+                            <div id="search_hints">
+                                <span id="search_input_hint">Keywords separated by space</span>
+                                <span id="search_loading_hint">Loading, wait please ...</span>
+                                <span id="search_download_err_hint">Download error, please check network and refresh again</span>
+                                <span id="search_other_docs_result_hint">Result from other docs</span>
+                                <span id="search_curr_doc_result_hint">Result from current doc</span>
+                            </div></a></li></ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="wrapper">
+        <div id="sidebar_wrapper">
+            <div id="sidebar">
+                <div id="sidebar_title">
+                    
+                </div>
+                <ul class="show">
+<li class="not_active with_link"><a href="/code-note/Linux/Licheepi_Nano/说明.html"><span class="label">说明</span><span class=""></span></a></li>
+<li class="not_active no_link"><a><span class="label">系统编译</span><span class="sub_indicator sub_indicator_collapsed"></span></a><ul class="">
+<li class="not_active with_link"><a href="/code-note/Linux/Licheepi_Nano/系统编译/编译U-boot.html"><span class="label">编译U-boot</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/code-note/Linux/Licheepi_Nano/系统编译/编译Linux.html"><span class="label">编译Linux</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/code-note/Linux/Licheepi_Nano/系统编译/编译BuildRoot.html"><span class="label">编译BuildRoot</span><span class=""></span></a></li>
+</ul>
+</li>
+<li class="active_parent with_link"><a href="/code-note/Linux/Licheepi_Nano/no_translate.html?ref=驱动/GPIO驱动/系统自带驱动.html&from=/Linux/Licheepi_Nano/驱动/GPIO驱动/系统自带驱动.html"><span class="label">驱动开发</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="active_parent no_link"><a><span class="label">GPIO驱动</span><span class="sub_indicator"></span></a><ul class="show">
+<li class="active with_link"><a href="/code-note/Linux/Licheepi_Nano/驱动/GPIO驱动/寄存器GPIO驱动.html"><span class="label">寄存器GPIO驱动</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/code-note/Linux/Licheepi_Nano/驱动/GPIO驱动/基于设备树.html"><span class="label">基于设备树</span><span class=""></span></a></li>
+<li class="not_active with_link"><a href="/code-note/Linux/Licheepi_Nano/驱动/GPIO驱动/基于platform总线.html"><span class="label">基于platform总线</span><span class=""></span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+        <div id="article">
+            <div id="menu_wrapper">
+                <div id="menu">
+                </div>
+            </div>
+            <div id="content_wrapper">
+                <div id="content_body">
+                    <div id="article_head">
+                        <div id="article_title">
+                            
+                            <h1>寄存器GPIO驱动</h1>
+                            
+                        </div>
+                        <div id="article_tags">
+                            <ul>
+                            
+                            </ul>
+                        </div>
+                        <div id="article_info">
+                        <div id="article_info_left">
+                            <span class="article_author">
+                                
+                            </span>
+                            
+                                <span class="article_date" title="Last modify date: 2023-02-01">
+                                    2023-02-01
+                                </span>
+                            
+                        </div>
+                        <div id="article_info_right">
+                            
+                        </div>
+                        </div>
+                    </div>
+                    <div id="article_tools">
+                        <span></span>
+                        <span id="toc_btn"></span>
+                    </div>
+                    <div id="update_history">
+                        
+                    </div>
+                    <div id="article_content">
+                        
+                            <h2 id="%E7%9B%AE%E6%A0%87">目标</h2>
+<p>​	编写驱动，控制PA0输出高低电平。</p>
+<h2 id="F1C100S%E7%A1%AC%E4%BB%B6%E6%8E%A5%E5%8F%A3">F1C100S硬件接口</h2>
+<blockquote>
+<p>查找PA0的寄存器</p>
+</blockquote>
+<p><img src="./assets/pa_reg.png" alt="" /></p>
+<p><img src="./assets/pa_reg2.png" alt="" /></p>
+<blockquote>
+<p>通过上面寄存器发现，PA只有PA0-PA3可用作普通IO</p>
+<p>且只需要PA Configure register 0 和 PA Data register 即可控制IO</p>
+</blockquote>
+<p><img src="./assets/gpio.png" alt="" /></p>
+<blockquote>
+<p>GPIO基础地址：0x01c20800</p>
+<p>GPIOA基础地址：0*0x24 + 0x01c20800 = 0x01c20800</p>
+<p>​		Pa_CFG0:  0*0x24 + 0 + 0x01c20800 = 0x01c20800</p>
+<p>​		Pa_DATA: 0*0x24 + 0x10 + 0x01c20800 = 0x01c20810</p>
+</blockquote>
+<h2 id="%E5%AD%97%E7%AC%A6%E8%AE%BE%E5%A4%87%E9%A9%B1%E5%8A%A8">字符设备驱动</h2>
+<h3 id="%E9%A9%B1%E5%8A%A8%E7%A8%8B%E5%BA%8F">驱动程序</h3>
+<p>led.c</p>
+
+<pre class="language-none"><code class="language-none">#include &lt;linux/module.h&gt;
+#include &lt;linux/kernel.h&gt;
+#include &lt;linux/fs.h&gt;
+#include &lt;linux/init.h&gt;       
+#include &lt;linux/uaccess.h&gt;
+#include &lt;asm/io.h&gt;          //含有ioremap函数iounmap函数
+#include &lt;asm/uaccess.h&gt;     //含有copy_from_user函数和含有copy_to_user函数
+#include &lt;linux/device.h&gt;    //含有类相关的设备函数
+#include &lt;linux/cdev.h&gt;
+
+#define GPIOA_CFG0  (0X01C20800)
+#define GPIOA_DATA  (0X01C20810)
+
+static dev_t led_dev_num;   //定义一个设备号
+static struct cdev * led_dev;   
+static struct class * led_class;
+static struct device * led0;
+
+size_t * gpioa_cfg0;
+size_t * gpioa_data;
+
+static int led_open(struct inode * inode, struct file * file)
+{
+    /* GPIOA配置 */ 
+    *((volatile size_t*)gpioa_cfg0) &amp;= ~(7&lt;&lt;0); //清除配置寄存器 
+    *((volatile size_t*)gpioa_cfg0) |= (1&lt;&lt;0); //配置GPIOE10为输出模式 
+    printk(KERN_DEBUG&quot;open led!!!\n&quot;); 
+    return 0;
+}
+
+static int led_close(struct inode *inode, struct file *filp)
+{
+    printk(KERN_DEBUG&quot;close led!!!\n&quot;);
+    return 0;
+}
+
+
+static int led_read(struct file *filp, char __user *buff, size_t count, loff_t *offp)
+{
+    return 0;
+}
+
+
+static int led_write(struct file *filp, const char __user *buff, size_t count, loff_t *offp)
+{
+    int ret;
+    size_t status; 
+    ret = copy_from_user(&amp;status,buff,4);     //将用户空间拷贝到内核空间的status
+    if(ret &lt; 0)
+        printk(KERN_DEBUG&quot;write error!!!\n&quot;);   //输出信息
+    else
+        printk(KERN_DEBUG&quot;write led ok!!!\n&quot;);   //输出信息
+    *((volatile size_t*)gpioa_data) &amp;= ~(1&lt;&lt;0) ;//清除GPIOE12状态
+    if(status == 1)
+        *((volatile size_t*)gpioa_data) |= (1&lt;&lt;0);//设置GPIOE12状态1
+    return ret;
+}
+
+static struct file_operations led_ops = 
+{
+        .owner = THIS_MODULE,
+        .open  = led_open,
+        .read  = led_read,
+        .write = led_write,
+        .release = led_close,
+};
+
+static int __init led_init(void)   
+{
+    int ret;
+    led_dev = cdev_alloc();    //动态申请一个设备结构体
+    if(led_dev == NULL)
+    {
+        printk(KERN_WARNING&quot;cdev_alloc failed!\n&quot;);
+        return -1;
+    }
+    ret = alloc_chrdev_region(&amp;led_dev_num,0,1,&quot;led&quot;);  //动态申请一个设备号
+    if(ret !=0)
+    {
+        printk(KERN_WARNING&quot;alloc_chrdev_region failed!\n&quot;);
+        return -1;
+    }
+    led_dev-&gt;owner = THIS_MODULE;  //初始化设备管理结构体的owner为THIS_MODULE
+    led_dev-&gt;ops = &amp;led_ops;        //初始化设备操作函数指针为led_ops函数
+    cdev_add(led_dev,led_dev_num,1);  //将设备添加到内核中
+    led_class = class_create(THIS_MODULE, &quot;led_class&quot;);  //创建一个名为led_class的类  /sys/class
+    if(led_class == NULL)
+    {
+        printk(KERN_WARNING&quot;led_class failed!\n&quot;);
+        return -1;
+    }
+    led0 = device_create(led_class,NULL,led_dev_num,NULL,&quot;led_A0&quot;);//创建一个设备名为led0 /dev/led0
+    if(IS_ERR(led0))
+    {
+        printk(KERN_WARNING&quot;device_create failed!\n&quot;);
+        return -1;
+    }
+    gpioa_cfg0 = ioremap(GPIOA_CFG0,4);  //将GPIOE_CFG0物理地址映射为虚拟地址
+    gpioa_data = ioremap(GPIOA_DATA,4);  //将GPIOE_DATA物理地址映射为虚拟地址
+    return 0;
+}
+
+static void __exit led_exit(void)   
+{
+    cdev_del(led_dev);  //从内核中删除设备管理结构体
+    unregister_chrdev_region(led_dev_num,1);  //注销设备号
+    device_destroy(led_class,led_dev_num);   //删除设备节点
+    class_destroy(led_class);                //删除设备类
+    iounmap(gpioa_cfg0);  //取消GPIOE_CFG0映射
+    iounmap(gpioa_data);  //取消GPIOE_DATA映射
+}
+
+module_init(led_init);
+module_exit(led_exit);
+
+MODULE_LICENSE(&quot;GPL&quot;);          //不加的话加载会有错误提醒
+MODULE_AUTHOR(&quot;1477153217@qq.com&quot;);     //作者
+MODULE_VERSION(&quot;0.1&quot;);          //版本
+MODULE_DESCRIPTION(&quot;led_dev&quot;);  //简单的描述
+
+</code></pre>
+<h3 id="makefile">makefile</h3>
+
+<pre class="language-none"><code class="language-none">KERN_DIR = /home/xsx/licheepi_nano_tf/Linux
+
+all:
+    make -C $(KERN_DIR) M=$(shell pwd) modules
+
+clean:
+    rm -rf *.order *o *.symvers *.mod.c *.mod *.ko
+
+obj-m += led.o 
+</code></pre>
+<h3 id="%E7%BC%96%E8%AF%91">编译</h3>
+<p>编译驱动要使用 u-boot和linux相同的编译链</p>
+<p><code>make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-</code></p>
+<p>会按照makefile的规则编译出led.ko</p>
+<h2 id="%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F">测试程序</h2>
+<p>led_app.c</p>
+
+<pre class="language-none"><code class="language-none">#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+
+int main(int argc, char **argv)
+{
+    int fd;
+    char *filename = NULL;
+    int val;
+
+    filename = argv[1];
+    fd = open(filename, O_RDWR);
+    if (fd &lt; 0)
+    {
+        printf(&quot;err, can`t open %s\r\n&quot;, filename);
+        return 0;
+    }
+
+    if (argc != 3)
+    {
+        printf(&quot;usage: ./led_app.exe [device] [on/off]\r\n&quot;);
+    }
+
+    if (!strcmp(argv[2], &quot;on&quot;))
+    {
+        val = 0;
+    }
+    else if (!strcmp(argv[2], &quot;off&quot;))
+    {
+        val = 1;
+    }
+    else
+    {
+        printf(&quot;输入错误！\r\n&quot;);
+        return 0;
+    }
+
+    write(fd, &amp;val, 4);
+    close(fd);
+    return 0;
+}
+</code></pre>
+<h3 id="%E7%BC%96%E8%AF%91">编译</h3>
+<p>编译测试程序需要用 buildroot 生成 的交叉编译链</p>
+<p><code>arm-linux-gcc led_app.c -o led_app.exe</code></p>
+<h2 id="%E8%BF%90%E8%A1%8C">运行</h2>
+<p>将led.ko 和 led_app.exe拷贝到开发板</p>
+<h3 id="%E5%8A%A0%E8%BD%BD%E9%A9%B1%E5%8A%A8">加载驱动</h3>
+<p><code>insmod led.ko</code></p>
+<p>出现<code>loading out-of-tree module taints kernel.</code>，即表明加载成功</p>
+<h3 id="%E8%BF%90%E8%A1%8C%E6%B5%8B%E8%AF%95%E7%A8%8B%E5%BA%8F">运行测试程序</h3>
+<p>led亮： <code>./led_app.exe /dev/led_A0 on</code></p>
+<p>led灭： <code>./led_app.exe /dev/led_A0 off</code></p>
+<p>led_A0 为led.c驱动代码中设置的设备名称，驱动加载后，会在/dev/下创建该驱动的文件</p>
+
+                        
+                    </div>
+                </div>
+                <div id="previous_next">
+                    <div id="previous">
+                        
+                        <a href="/code-note/Linux/Licheepi_Nano/no_translate.html?ref=驱动/GPIO驱动/系统自带驱动.html&from=/Linux/Licheepi_Nano/驱动/GPIO驱动/系统自带驱动.html">
+                            <span class="icon"></span>
+                            <span class="label">驱动开发</span>
+                        </a>
+                        
+                    </div>
+                    <div id="next">
+                        
+                        <a href="/code-note/Linux/Licheepi_Nano/驱动/GPIO驱动/基于设备树.html">
+                            <span class="label">基于设备树</span>
+                            <span class="icon"></span>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div id="comments-container"></div>
+            </div>
+            <div id="toc_wrapper">
+                <div id="toc">
+                    <div id="toc_content">
+                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="to_top" href="#"></a>
+    <div id="doc_footer">
+        <div id="footer">
+            <div id="footer_top">
+                <ul>
+<li><a></a><ul><li><a target="_blank" href="/code-note/#"></a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <div id="footer_bottom">
+                <ul>
+<li><a target="_blank" href="https://github.com/teedoc/teedoc">Generated by teedoc</a></li>
+</ul>
+
+            </div>
+        </div>
+    </div>
+    
+        <script src="/code-note/teedoc-plugin-markdown-parser/mermaid.min.js"></script>
+    
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    
+        <script src="/code-note/static/js/theme_default/tocbot.min.js"></script>
+    
+        <script src="/code-note/static/js/theme_default/main.js"></script>
+    
+        <script src="/code-note/static/js/theme_default/viewer.min.js"></script>
+    
+        <script src="/code-note/static/css/theme_default/prism.min.js"></script>
+    
+        <script src="/code-note/static/js/search/search_main.js"></script>
+    
+        <script src="/code-note/static/js/custom.js"></script>
+    
+</body>
+
+</html>
